@@ -12,11 +12,14 @@ class tablero:
     #tablero1 = np.full([10,10]," ")
     Contarbarcos = 0
     BarcosPosCPU = []
+    BarcosPosJ1 = []
     #tablero1 = np.full([10,10]," ",dtype= str)
     def __init__(self,nombre):
         self.nombre = nombre
         self.tablero1 = np.full([10,10]," ")
         self.tablero1disparar = np.full([10,10]," ")
+
+        
 
     def Mostrar(self):
         print(self.nombre)
@@ -25,11 +28,11 @@ class tablero:
 
     def PintarTablero(self):
         print("TABLERO: ",self.nombre)
-        print(":##########################################:")
+        print(":==0===1===2===3===4===5===6===7===8===9==:")
         print(self.tablero1)
-        print(":------------------------------:")
+        print(":-----------------------------------------:")
         print(self.tablero1disparar)
-        print(":##########################################:")
+        print(":==0===1===2===3===4===5===6===7===8===9==:")
         pass
     
     def LeerTablero(self,buscar): #Lee el Tablero y busca lo que indiques por parametro, O=Barco X=Tocado ' '=Por Descubrir -=Agua
@@ -38,11 +41,25 @@ class tablero:
            for j, elemento in enumerate(fila):  # Recorre con índice de columna
                 if buscar == elemento:
                     print(f" Encontrado {elemento} en la posición ({i}, {j})")
-
+                    
                     ##añadir posiciones de barcos en una lista
                     ##self.BarcosPosCPU.append([i,j])
                     ##print("EJEMPLO DE LISTAAAAA: ",self.BarcosPosCPU)
         pass
+
+    def LeerTableroEslera(self,buscar,eslera): #Lee el Tablero y busca lo que indiques por parametro, O=Barco X=Tocado ' '=Por Descubrir -=Agua
+        print("Leer Tablero con posicion eslera...")
+        for i, fila in enumerate(self.tablero1):  # Recorre con índice de fila
+           for j, elemento in enumerate(fila):  # Recorre con índice de columna
+                if buscar == elemento and (buscar + eslera) <10:
+                    print(f" Encontrado {elemento} en la posición ({i}, {j} con eslera de: {eslera})")
+        pass
+
+
+
+
+
+
         #tablero.tablero("Mapear").LeerTablero
     def DispararBarcos(self, DisX, DisY,otrotablero): 
         turno = False
@@ -57,7 +74,7 @@ class tablero:
                         #otrotablero.tablero1[i][j]= "P"
                         ###otrotablero.tablero1[i][j] = "X"
                         print(" ---------")
-                        print(" TOCADO!!")
+                        print("\033[31m TOCADO!!\033[0m")
                         print(" ---------")
                         turno = True
                         #break
@@ -69,7 +86,7 @@ class tablero:
                         #self.tablero1[i][j] = "-"
                         self.tablero1disparar[i][j] = "-"
                         print(" ---------")
-                        print(" AGUA!!")
+                        print("\033[34m AGUA!!\033[0m")
                         print(" ---------")
                         print("\n Pasamos el turno...")
                         #turno = 1
@@ -95,7 +112,7 @@ class tablero:
                         #otrotablero.tablero1[i][j]= "P"
                         ###otrotablero.tablero1[i][j] = "X"
                         print(" ---------")
-                        print(" CPU: TOCADO!!")
+                        print("\033[31m TOCADO!!\033[0m")
                         print(" ---------")
                         turno = True
                         #break
@@ -107,7 +124,7 @@ class tablero:
                         #self.tablero1[i][j] = "-"
                         self.tablero1disparar[i][j] = "-"
                         print(" ---------")
-                        print(" CPU:     AGUA!!")
+                        print("\033[34m AGUA!!\033[0m")
                         print(" ---------")
                         print("\n Pasamos el turno...")
                         #turno = 1
